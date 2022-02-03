@@ -2,7 +2,9 @@
 import './App.css';
 import { Formik, Form, Field, FieldArray, yupToFormErrors, ErrorMessage } from "formik"
 import * as Yup from 'yup';
+
 import { KerrorMessage } from './KerrorMessage';
+
 const validationscheme = Yup.object({
   name: Yup.string().required("Name is Required").max(50, "tolarge").min(2, "oshort"),
   pass: Yup.string().matches("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", "must required 8 character upper case lowercase").required(),
@@ -29,11 +31,12 @@ function App() {
           date: "",
           select: "",
           social: [],
-          friends: []
+          friends: [],
+          file:[]
         }}
         onSubmit={(value) => {
           console.log(value)
-        }} render={({ values }) => (<Form>
+        }} render={({ values}) => (<Form>
           <label>NAME : </label>
           <Field name="name" type="text"   ></Field>
           <KerrorMessage name="name" /><br></br>
@@ -96,6 +99,8 @@ function App() {
                 
                 <div>
                 <br></br>
+                <label>upload image : </label>
+                  <input type="file" name="file" accept="image/*" ></input><br></br><br></br>
                   <Field id="btn1" type="submit" name="submit"></Field>&nbsp;&nbsp;&nbsp;
                   <Field id="btn2" type="reset" name="reset"></Field>
                 </div>
